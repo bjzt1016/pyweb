@@ -6,15 +6,15 @@ Pyweb
 
 Installation
 
-Python2.7
-Django1.8
-Windows or Linux or Mac
+1.Python2.7
+2.Django1.8
+3.Windows or Linux or Mac
 
 
 ToDo
-add ajax
-add a description for hot key
-solve coding problem of Chinese
+1.add ajax
+2.add a description for hot key
+3.solve coding problem of Chinese
 
 
 License
