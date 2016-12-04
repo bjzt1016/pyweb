@@ -1,0 +1,22 @@
+{% load staticfiles %} 
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+	<head>
+		<title>我的第一个 HTML 页面</title>
+	</head>
+
+	<body>
+		<form method='POST' action='{% url 'submit' %}'>
+				{% csrf_token %}
+				
+				{% if form %}
+				    {{ form.as_p }}
+				    <!--type='submit'定义提交按钮。提交按钮会把表单数据发送到服务器。 -->
+				    <input type='submit' value='保存' />
+				{% endif %}				
+		</form>
+	</body>
+
+</html>	
