@@ -13,12 +13,6 @@ Installation
 3.Windows or Linux or Mac
 
 
-ToDo
-1.add ajax
-2.add a description for hot key
-3.solve coding problem of Chinese
-
-
 
 ToDo
 
