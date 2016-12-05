@@ -1,0 +1,209 @@
+{% load staticfiles %} 
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>ACE in Action</title>
+        <!-- <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet"> -->
+        <link href="{% static 'css/navbar-static-top.css' %}" rel="stylesheet">
+        <!-- // <script src="{% static 'js/bootstrap.min.js' %}"></script> -->
+        <script src="{% static 'js/jquery.min.js' %}" type="text/javascript" charset="utf-8"></script>
+
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+        <style type="text/css" media="screen">
+            #editor { 
+                position: relative; /* important*/
+                top: 0;
+                right: 0;
+                bottom: 0;
+                left: 0;
+                height: 400px;  /* important*/
+            }
+        </style>
+
+        <style>
+            .modal_left{
+                width:40%;
+                text-align: right;
+                letter-spacing: 1px;
+            }
+
+            #myModal>.modal-dialog{
+                width:800px;
+
+            }
+            code{
+                color:#000;
+                font-weight: bold;
+            }
+            .modal-body li{
+                margin-bottom: 3px;
+            }
+            .modal-title#myModalLabel{
+                font-weight: bold;
+            }
+        </style>
+    </head>
+    <body>
+        {% include 'navbar.html' %}
+
+        <!-- <div class="container">
+            <div id="editor">function foo(items) {
+                var x = "All this is syntax highlighted";
+                return x;
+            }</div>
+            <div class="text-center">---End of editor---</div>
+        </div> -->
+        <div class="container">
+
+            <form method='POST' action='{% url 'submit' %}'>
+                {% csrf_token %}
+                <div class="row">
+                    <div class="row">
+                        <div class="col-md-5">
+                            <h4>Python Editor</h4>
+                        </div>
+                        <div class="col-md-1 pull-right">
+                            <!-- <button class="btn" id="keyboard" > -->
+                            <button type="button" title="快捷键" class="btn " data-toggle="modal" data-target="#myModal" style="padding:0 12px 6px"><img src="{% static 'img/keyboard.png' %}" alt="" style="width:20px;height:26px">
+                            </button>
+                            <div class="modal fade" id="myModal"  role="dialog">
+                                <div class="modal-dialog modal-lg">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                            <h4 class="modal-title" id="myModalLabel">快捷键（按 Esc 退出）</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            <ul class="pl_60">
+                                                <li>
+                                                    <div class="inline-block modal_left"> <code>Ctrl-/</code>：注释 </div>
+                                                </li>
+                                                <li>
+                                                    <div class="inline-block modal_left"> <code>Ctrl-[</code>：块反缩进 </div>
+                                                </li>
+                                                <li>
+                                                    <div class="inline-block modal_left"> <code>Ctrl-]</code>：块缩进 </div>
+                                                </li>
+                                                <li>
+                                                    <div class="inline-block modal_left"> <code>Ctrl-A</code>：选择全部</div>
+                                                </li>
+                                                <li>
+                                                    <div class="inline-block modal_left"> <code>Ctrl-L</code>：跳转到 </div>
+                                                </li>
+                                                <li>
+                                                    <div class="inline-block modal_left"> <code>Ctrl-F</code>：查找</div>
+                                                </li>
+                                                <li>
+                                                    <div class="inline-block modal_left"> <code>Ctrl-Alt-K</code>：查找全部 </div>
+                                                </li>
+                                                <li>
+                                                    <div class="inline-block modal_left"> <code>Alt-K</code>：选择并查找下一个 </div>
+                                                </li>
+                                                <li>
+                                                    <div class="inline-block modal_left"> <code>Alt-Shift-K</code>：选择并查找上一个 </div>
+                                                </li>
+                                                <li>
+                                                    <div class="inline-block modal_left"> <code>Ctrl-D</code>：删除当前行 </div>
+                                                </li>
+                                                <li>
+                                                    <div class="inline-block modal_left"> <code> Ctrl-Shift-D</code>：复制并粘贴当前行</div>
+                                                </li>
+                                                <li>
+                                                    <div class="inline-block modal_left"> <code>Ctrl-H</code>：替换</div>
+                                                </li>
+                                                <li>
+                                                    <div class="inline-block modal_left"> <code>Alt-Up</code>：上移行 </div>
+                                                </li>
+                                                <li>
+                                                    <div class="inline-block modal_left"> <code>Alt-Down</code>：下移行 </div>
+                                                </li>
+                                                <li>
+                                                    <div class="inline-block modal_left"> <code>Ctrl-Shift-Left</code>：选择左侧单词 </div>
+                                                </li>
+                                                <li>
+                                                    <div class="inline-block modal_left"> <code>Ctrl-Shift-Right</code>：选择右侧单词 </div>
+                                                </li>
+                                                <li>
+                                                    <div class="inline-block modal_left"> <code>Alt-Shift-Left</code>：选择到行起始</div>
+                                                </li>
+                                                <li>
+                                                    <div class="inline-block modal_left"> <code>Alt-Shift-Right</code>：选择到行结束</div>
+                                                </li>
+                                                <li>
+                                                    <div class="inline-block modal_left"> <code>Ctrl-Home</code>：跳转到开始</div>
+                                                </li>
+                                                <li>
+                                                    <div class="inline-block modal_left"> <code>Ctrl-End</code>：跳转到结尾</div>
+                                                </li>
+                                                <li>
+                                                    <div class="inline-block modal_left"> <code>Ctrl-Left</code>：跳到单词左侧 </div>
+                                                </li>
+                                                <li>
+                                                    <div class="inline-block modal_left"> <code>Ctrl-Right</code>：跳到单词右侧 </div>
+                                                </li>
+                                                <li>
+                                                    <div class="inline-block modal_left"> <code>Alt-Left|Home</code>：跳转到行起始 </div>
+                                                </li>
+                                                <li>
+                                                    <div class="inline-block modal_left"> <code>Alt-Right|End</code>：跳转到行结束</div>
+                                                </li>
+                                                
+                                            </ul>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                         </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div id="editor">#coding:utf-8
+#Python2.7 Django1.8</div>
+                    </div>
+                </div>
+                <div class="text-center">---End of editor---</div>
+                            
+                {% if form %}
+                    {{ form.as_p }}
+                    <br/>
+                    <!--type='submit'定义提交按钮。提交按钮会把表单数据发送到服务器。 -->
+                    <input class="btn btn-primary" type='submit' value='运行' />
+                {% endif %}            
+            </form>
+
+            <br/>
+            <br/>
+        </div>
+
+            
+        <script src="{% static 'js/src-noconflict/ace.js' %}" type="text/javascript" charset="utf-8"></script>
+        <script>
+            // var editor = ace.edit("editor");
+            // editor.setTheme("ace/theme/twilight");
+            // editor.getSession().setMode("ace/mode/python");
+
+               var textarea = $('#content');
+
+               var editor = ace.edit("editor");
+               editor.setTheme("ace/theme/twilight");
+               editor.getSession().setMode("ace/mode/python");
+
+               editor.getSession().on('change', function () {
+                   textarea.val(editor.getSession().getValue());
+               });
+
+               textarea.val(editor.getSession().getValue());   //init
+
+        </script>
+
+
+    </body>
+</html>
