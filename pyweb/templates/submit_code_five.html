@@ -61,7 +61,7 @@
         </div> -->
         <div class="container">
 
-            <form method='POST' action='{% url "submit" %}'>
+            <form method='POST'>
                 {% csrf_token %}
                 <div class="row">
                     <div class="col-md-5">
@@ -166,18 +166,23 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div id="editor">#coding:utf-8
-#Python3.3 Django1.8</div>
+#Python2.7 or 3.3+
+from __future__ import unicode_literals
+</div>
                     </div>
                 </div>
+                
                 <div class="text-center">---End of editor---</div>
                             
                 {% if form %}
                     {{ form.as_p }}
                     <br/>
                     <!--type='submit'定义提交按钮。提交按钮会把表单数据发送到服务器。 -->
-                    <input class="btn btn-primary" type='submit' value='运行' />
+                    <input class="btn btn-primary" type='submit' id='yunxing' value='运行' />
                 {% endif %}            
             </form>
+
+            <p>result: <span id='result'>some</span></p>
 
             <br/>
             <br/>
@@ -202,6 +207,32 @@
 
                textarea.val(editor.getSession().getValue());   //init
 
+        </script>
+        <script>
+            $(document).ready(function(){
+              $("#yunxing").click(function(){
+                    var input_string = $("#content").val();
+                    $.ajax({
+                        url : "submit/", 
+                        type : "POST",
+                        // dataType: "json", //
+                        data : {
+                            python_code : input_string,
+                            csrfmiddlewaretoken: '{{ csrf_token }}'
+                            },
+                        // success : function(json) {
+                        //     $('#result').append( 'ServerResponse:' + json.server_response);
+                        // },
+                        success : function(ret) {
+                            $('#result').html(ret);
+                        },
+                        error : function(xhr,errmsg,err) {
+                            alert(xhr.status + ": " + xhr.responseText);
+                        }
+                    });
+                    return false;
+              });
+            });
         </script>
 
 

@@ -30,13 +30,13 @@
             <div class="text-center">---End of editor---</div>
         </div> -->
         <div class="container">
-            <form method='POST' action='{% url "submit" %}'>
+            <form method='POST' action='{% url 'submit' %}'>
                 {% csrf_token %}
                 <div class="row">
                     <h4>Python Editor</h4>
                     <div class="col-md-12">
                         <div id="editor">#coding:utf-8
-#Python2.7 Django1.8</div>
+#Python3.3 Django1.8</div>
                     </div>
                 </div>
                 <div class="text-center">---End of editor---</div>

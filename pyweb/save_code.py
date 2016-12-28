@@ -1,4 +1,6 @@
 #coding:utf-8
-#Python2.7 Django1.8
+#Python2.7 or 3.3+
+from __future__ import unicode_literals
 
-print u'和'.encode('utf-8')
+print('a')
+print('你的名字')
