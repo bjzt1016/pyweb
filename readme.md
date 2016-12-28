@@ -13,6 +13,9 @@ Installation
 3.Windows or Linux or Mac
 
 
+Fire up the server
+1.python manage.py runserver
+
 
 ToDo
 
